@@ -4,8 +4,9 @@ import sublinks from "./data";
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isSubmenuOpen, setIsSubmenuOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const [location, setLocation] = useState({});
 
   const openSidebar = () => {
     setIsSidebarOpen(true);
@@ -13,7 +14,8 @@ export const AppProvider = ({ children }) => {
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
-  const openSubmenu = () => {
+  const openSubmenu = (text, coordinates) => {
+    setLocation(coordinates);
     setIsSubmenuOpen(true);
   };
   const closeSubmenu = () => {
@@ -28,6 +30,7 @@ export const AppProvider = ({ children }) => {
         closeSubmenu,
         openSidebar,
         closeSidebar,
+        location
       }}
     >
       {children}
@@ -36,5 +39,6 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useGlobalContext = () => {
-  return useContext(AppContext)
-}
+  // useContext(AppContext)で「React.createContext()」で生成したインスタンス「AppContext」に戻り値として設定したvalueをエクスポートしていることになり、他のファイルでそれらのvalueを使用することができるようになる
+  return useContext(AppContext);
+};
