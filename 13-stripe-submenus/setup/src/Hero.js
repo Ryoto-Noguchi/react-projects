@@ -3,9 +3,9 @@ import phoneImg from './images/phone.svg'
 import {useGlobalContext} from "./context"
 
 const Hero = () => {
-  const {closSubmenu} = useGlobalContext()
+  const {closeSubmenu} = useGlobalContext()
   return (
-    <section className="hero">
+    <section className="hero" onMouseOver={closeSubmenu}>
       <div className="hero-center">
       <article className="hero-info">
         <h1>Payments infrastructure for the internet</h1>

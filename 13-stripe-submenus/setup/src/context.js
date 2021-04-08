@@ -7,6 +7,7 @@ export const AppProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [location, setLocation] = useState({});
+  const [page, setPage] = useState({ page: "", links: [] });
 
   const openSidebar = () => {
     setIsSidebarOpen(true);
@@ -15,6 +16,8 @@ export const AppProvider = ({ children }) => {
     setIsSidebarOpen(false);
   };
   const openSubmenu = (text, coordinates) => {
+    const page = sublinks.find((link) => link.page === text); // 画面でクリックされたリンクのtextとdataのpage:xが一緒であれば
+    setPage(page)
     setLocation(coordinates);
     setIsSubmenuOpen(true);
   };
@@ -30,7 +33,8 @@ export const AppProvider = ({ children }) => {
         closeSubmenu,
         openSidebar,
         closeSidebar,
-        location
+        location,
+        page
       }}
     >
       {children}
